@@ -10,7 +10,7 @@ export default function PurchaseDetails() {
   const [productId, setProductId] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  const fetchPurchase = async () => {
+  const fetchPurchase = useCallback(async () => {
     try {
       const response = await axios.get(`${BASE_URL}/purchases/${id}`);
       setPurchase(response.data.response.data);
@@ -18,7 +18,8 @@ export default function PurchaseDetails() {
       console.log("Error while fetching purchase details");
       console.log(error);
     }
-  };
+  }, [id]);
+  
 
   const fetchProducts = async () => {
     try {
@@ -33,7 +34,8 @@ export default function PurchaseDetails() {
   useEffect(() => {
     fetchPurchase();
     fetchProducts();
-  }, [id]);
+  }, [id, fetchPurchase]);
+  
 
   const handleAddPurchaseItem = async (e) => {
     e.preventDefault();
