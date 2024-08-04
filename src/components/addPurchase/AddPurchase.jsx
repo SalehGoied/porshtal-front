@@ -11,7 +11,7 @@ export default function AddPurchase(props) {
   const [supplier, setSupplier] = useState([]);
   const navigate = useNavigate();
 
-  const postData = async () => {
+  const postData = async () => { 
     try {
       const postData = await axios.post(
         `${BASE_URL}/purchases`,
