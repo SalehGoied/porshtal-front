@@ -1,4 +1,4 @@
-name: Deploy to SFTP
+name: Deploy to cPanel
 
 on:
   push:
@@ -9,6 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [20.x]
+
     steps:
       - name: Checkout Code 🚚
         uses: actions/checkout@v3
@@ -16,16 +20,18 @@ jobs:
       - name: Install Dependencies 📦
         run: npm install
 
-      - name: Build React App 🏗️
+      - name: Build React App / Vue App (depending on user app) 🏗️
         run: npm run build
 
-      - name: Upload to SFTP Server 📂
-        uses: appleboy/ftp-action@releases/v2
+      - name: Upload to cPanel 📂
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.SFTP_HOST }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          password: ${{ secrets.SFTP_PASSWORD }}
-          port: 22
-          local-dir: "./build/"
-          remote-dir: "/public_html/"
-          secure: true  # Use `false` if your server does not support FTPS
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+          exclude: |
+            **/.git**
+            **/.git*/**
+            **/node_modules/**
+            **/.**
