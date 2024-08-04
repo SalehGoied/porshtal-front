@@ -20,7 +20,7 @@ jobs:
         run: npm run build
 
       - name: Upload to SFTP Server 📂
-        uses: appleboy/drone-sftp
+        uses: appleboy/drone-sftp@v1.6.14
         with:
           host: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USERNAME }}
