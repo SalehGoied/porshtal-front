@@ -1,4 +1,4 @@
-name: Deploy to cPanel
+name: Deploy to SFTP
 
 on:
   push:
@@ -9,10 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
       - name: Checkout Code 🚚
         uses: actions/checkout@v3
@@ -20,18 +16,15 @@ jobs:
       - name: Install Dependencies 📦
         run: npm install
 
-      - name: Build React App / Vue App (depending on user app) 🏗️
+      - name: Build React App 🏗️
         run: npm run build
 
-      - name: Upload to cPanel 📂
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Upload to SFTP Server 📂
+        uses: appleboy/drone-sftp@v1.1.2
         with:
-          server: ftp.porshtal.com
-          username: front_test@porshtal.com
-          password: f~dVs86VQLxV
-          server-dir: /public_html/
-          exclude: |
-            **/.git**
-            **/.git*/**
-            **/node_modules/**
-            **/.**
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          source: "./build/"
+          target: "/public_html/"
