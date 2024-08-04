@@ -29,7 +29,7 @@ jobs:
           server: ftp.porshtal.com
           username: front_test@porshtal.com
           password: f~dVs86VQLxV
-          server-dir: /public_html
+          server-dir: /public_html/
           exclude: |
             **/.git**
             **/.git*/**
