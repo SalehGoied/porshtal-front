@@ -25,8 +25,8 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: front_test@porshtal.com
-        username: ftp.porshtal.com
+        server: ftp.porshtal.com
+        username: front_test@porshtal.com
         password: f~dVs86VQLxV
         port: 21
         server-dir: /public_html/
