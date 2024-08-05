@@ -1,36 +1,23 @@
-# # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# # dependencies
-# /node_modules
-# /.pnp
-# .pnp.js
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-# # testing
-# /coverage
+# testing
+/coverage
 
-# # production
-# /build
+# production
+/build
 
-# # misc
-# .DS_Store
-# .env.local
-# .env.development.local
-# .env.test.local
-# .env.production.local
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# npm-debug.log*
-# yarn-debug.log*
-# yarn-error.log*
-
-# Ignore everything
-*
-
-# Except the build directory
-!build/
-
-# Additionally, if you want to ensure the build directory is tracked, 
-# you might need to explicitly include it if it's not empty
-!build/**
-
-# Ignore gitignore file itself (Optional)
-.gitignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
